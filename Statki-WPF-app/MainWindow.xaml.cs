@@ -27,6 +27,7 @@ namespace Statki_WPF_app
 			InitializeComponent();
 			PrezepiszButtonsDoTablicy(visibleBbuttons);
 			ClearStatki();
+			btnClear.IsEnabled = false;
 		}
 
 		private void btnLosoj_Click(object sender, RoutedEventArgs e)
@@ -40,9 +41,17 @@ namespace Statki_WPF_app
 			WpiszStatekDoGridu(1);
 			WpiszStatekDoGridu(1);
 			WpiszStatekDoGridu(1);
-		}
+            btnLosoj.IsEnabled = false;
+            btnClear.IsEnabled = true;
+        }
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearStatki();
+            btnLosoj.IsEnabled = true;
+            btnClear.IsEnabled = false;
+        }
 
-		public void WpiszStatekDoGridu(int dlugoscStatku)
+        public void WpiszStatekDoGridu(int dlugoscStatku)
 		{
 			var random = new Random();
 			int rowRandom = random.Next(0, 10);
@@ -138,11 +147,6 @@ namespace Statki_WPF_app
 					hiddenButtons[i, j] = false;
 				}
 			}
-		}
-
-		private void btnClear_Click(object sender, RoutedEventArgs e)
-		{
-			ClearStatki();
 		}
 
 		public bool SetPole(int column, int row)
